@@ -1,4 +1,4 @@
-var config = require('../config'),
+var config = require('../lib/config'),
     assert = require('chai').assert,
     exec = require('child_process').exec,
     fs = require('fs');

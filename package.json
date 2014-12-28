@@ -1,8 +1,11 @@
 {
   "name": "sbm",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A simple git-based dependency manager",
-  "main": "sbm.js",
+  "main": "./lib/index",
+  "bin": {
+    "sbm": "./bin/sbm"
+  },
   "scripts": {
     "test": "make test"
   },
