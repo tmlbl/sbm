@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+var config = require('../lib/config'),
+    ui = require('../lib/ui'),
+    program = require('../lib/index');
+
+config.load(function (err) {
+  if (err && process.argv.indexOf('init') == -1) {
+    ui.warn(err);
+  }
+  program.parse(process.argv);
+});

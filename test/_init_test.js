@@ -1,4 +1,4 @@
-var init = require('../init'),
+var init = require('../lib/init'),
     assert = require('chai').assert,
     exec = require('child_process').exec,
     fs = require('fs');

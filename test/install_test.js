@@ -1,7 +1,7 @@
 var assert = require('chai').assert,
-    install = require('../install'),
+    install = require('../lib/install'),
     exec = require('child_process').exec,
-    config = require('../config'),
+    config = require('../lib/config'),
     fs = require('fs');
 
 describe('Install command', function () {
