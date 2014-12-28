@@ -1,0 +1,30 @@
+{
+  "name": "sbm",
+  "version": "1.0.0",
+  "description": "A simple git-based dependency manager",
+  "main": "sbm.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tmlbl/sbm.git"
+  },
+  "keywords": [
+    "git",
+    "dependency",
+    "package",
+    "manager"
+  ],
+  "author": "github/tmlbl",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/tmlbl/sbm/issues"
+  },
+  "homepage": "https://github.com/tmlbl/sbm",
+  "dependencies": {
+    "ansi": "^0.3.0",
+    "commander": "^2.5.1",
+    "mocha": "^2.1.0"
+  }
+}
