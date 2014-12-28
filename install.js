@@ -7,18 +7,17 @@ module.exports = function (repo, path, options, cb) {
   cb = cb || function () {};
   var sha = options.sha || 'master';
   if (!repo && !path) {
-    return sbmInstall(options);
+    return sbmInstall(options, cb);
   }
   if (!path) {
-    ui.error('Please supply a path');
-    process.exit(1);
+    return cb('Please supply a path');
   }
   var cmd = util.format('git clone %s %s', repo, path);
   console.log(util.format('Running %s', cmd));
   exec(cmd, function (err, stdout, stderr) {
     if (err) {
       ui.error(stderr);
-      return process.exit(1);
+      return cb(err);
     }
     cmd = util.format('cd %s && git rev-parse HEAD', path);
     exec(cmd, function (err, stdout, stderr) {
@@ -33,7 +32,7 @@ module.exports = function (repo, path, options, cb) {
   });
 };
 
-function sbmInstall(options) {
+function sbmInstall(options, cb) {
   var deps = config.config.dependencies;
   if (deps.length < 1) {
     ui.warn('No dependencies installed yet!');
@@ -47,6 +46,7 @@ function sbmInstall(options) {
         ui.error(stderr);
       }
       console.log(stdout);
+      return cb();
     });
   });
 }
