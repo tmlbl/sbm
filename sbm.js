@@ -9,7 +9,7 @@ var program = require('commander'),
 program
   .version('0.0.1')
 
-// The install task adds a repo to the current project
+// The install command adds a dependency to the current project
 program
   .command('install [repo] [path]')
   .description('add a repo to the project')
@@ -35,11 +35,16 @@ program
     	cmd = util.format('cd %s && git rev-parse HEAD', path);
     	exec(cmd, function (err, stdout, stderr) {
     		console.log('Checked %s out @%s', repo, stdout);
-        config.add(repo, path, options);
+        cmd = util.format('echo "%s" >> .gitignore', path);
+        exec(cmd, function (err, stdout, stderr) {
+          console.log(util.format('Added %s to .gitignore', path));
+          config.add(repo, path, options);
+        });
     	});
     });
   });
 
+// The init command creates a blank config file in the current directory
 program
   .command('init')
   .description('Initialize a project in the current directory')
@@ -53,11 +58,21 @@ program
     })
   });
 
+// The update command pulls new code for dependencies, if relevant
 program
   .command('update')
   .description('Pull the latest code for all dependencies')
-  .option('-r --recursive', 'Also update dependencies\' dependencies, ad infinitum')
+  .option('-r, --recursive', 'Also update dependencies\' dependencies, ad infinitum')
   .action(function (options) {
+
+  });
+
+program
+  .command('config [path]')
+  .description('Modify a dependencies\' configuration')
+  .option('-b, --branch [branch]', 'Set a branch name')
+  .option('-s --sha [sha]', 'Set a SHA hash')
+  .action(function (path, options) {
 
   });
 
