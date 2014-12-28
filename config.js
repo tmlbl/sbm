@@ -31,14 +31,26 @@ Config.prototype.init = function (cb) {
 
 };
 
-Config.prototype.add = function (repo, path, options) {
+Config.prototype.add = function (repo, path, options, cb) {
+  cb = cb || function () {};
   this.config.dependencies.push({
     url: repo,
     path: path,
     sha: options.sha,
     branch: options.branch
   });
-  this.save();
+  this.save(cb);
+};
+
+Config.prototype.remove = function (path, cb) {
+  var newDeps = [];
+  this.config.dependencies.forEach(function (dep) {
+    if (dep.path != path) {
+      newDeps.push(dep);
+    }
+  });
+  this.config.dependencies = newDeps;
+  this.save(cb);
 };
 
 Config.prototype.save = function (cb) {

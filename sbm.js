@@ -44,7 +44,6 @@ program
 config.load(function (err) {
 	if (err && process.argv.indexOf('init') == -1) {
 		ui.warn(err);
-    process.exit(1);
 	}
 	program.parse(process.argv);
 });
