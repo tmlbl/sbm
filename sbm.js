@@ -21,15 +21,7 @@ program
 program
   .command('init')
   .description('Initialize a project in the current directory')
-  .action(function (options) {
-    config.init(function (err) {
-      if (err) {
-        ui.error(err);
-        process.exit(1);
-      }
-      console.log('Initialized an empty project in ' + process.cwd());
-    })
-  });
+  .action(require('./init'));
 
 // The update command pulls new code for dependencies, if relevant
 program

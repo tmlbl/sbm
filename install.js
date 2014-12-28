@@ -3,7 +3,8 @@ var ui = require('./ui'),
     exec = require('child_process').exec,
     util = require('util');
 
-module.exports = function (repo, path, options) {
+module.exports = function (repo, path, options, cb) {
+  cb = cb || function () {};
   var sha = options.sha || 'master';
   if (!repo && !path) {
     return sbmInstall(options);
@@ -26,6 +27,7 @@ module.exports = function (repo, path, options) {
       exec(cmd, function (err, stdout, stderr) {
         console.log(util.format('Added %s to .gitignore', path));
         config.add(repo, path, options);
+        cb();
       });
     });
   });
