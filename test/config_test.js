@@ -1,9 +1,14 @@
 var config = require('../lib/config'),
     assert = require('chai').assert,
     exec = require('child_process').exec,
-    fs = require('fs');
+    fs = require('fs'),
+    setup = require('./setup');
 
 describe('Config module', function () {
+
+  beforeEach(function (done) {
+    setup.config({}, done);
+  });
 
   it('Should load the config', function (next) {
     config.load(function (err) {
