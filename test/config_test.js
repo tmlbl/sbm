@@ -10,6 +10,12 @@ describe('Config module', function () {
     setup.config({}, done);
   });
 
+  afterEach(function (done) {
+    exec('rm sbm.json', function () {
+      done();
+    });
+  });
+
   it('Should load the config', function (next) {
     config.load(function (err) {
       assert.equal(err, null, 'Err should be null');

@@ -21,4 +21,10 @@ describe('Init command', function () {
     });
   });
 
+  after(function (done) {
+    exec('rm sbm.json', function () {
+      done();
+    });
+  });
+
 });

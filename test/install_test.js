@@ -2,9 +2,24 @@ var assert = require('chai').assert,
     install = require('../lib/install'),
     exec = require('child_process').exec,
     config = require('../lib/config'),
-    fs = require('fs');
+    fs = require('fs'),
+    setup = require('./setup');
 
 describe('Install command', function () {
+
+  if (process.cwd().indexOf('test') == -1) {
+    process.chdir('./test');
+  }
+
+  before(function (done) {
+    setup.config({}, done);
+  });
+
+  after(function (done) {
+    exec('rm -rf sbm.json .gitignore somepath/', function () {
+      done();
+    });
+  });
 
   it('Should return err if path missing', function (next) {
     install('somerepo', null, {}, function (err) {
@@ -26,7 +41,7 @@ describe('Install command', function () {
   });
 
   it('Should add the path to .gitignore', function (next) {
-    fs.readFile('.gitignore', function (err, content) {
+    fs.readFile('./.gitignore', function (err, content) {
       assert.equal(err, null, 'Err should equal null');
       assert.equal(content.toString(), 'somepath\n', 'Path should be in .gitignore');
       next();
