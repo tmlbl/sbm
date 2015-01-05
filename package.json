@@ -27,6 +27,7 @@
   "homepage": "https://github.com/tmlbl/sbm",
   "dependencies": {
     "ansi": "^0.3.0",
+    "async": "^0.9.0",
     "commander": "^2.5.1"
   },
   "devDependencies": {

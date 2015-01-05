@@ -3,8 +3,6 @@ var init = require('../lib/init'),
     exec = require('child_process').exec,
     fs = require('fs');
 
-process.chdir('./test');
-
 describe('Init command', function () {
 
   it('Should not cause an error', function (next) {
