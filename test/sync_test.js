@@ -5,19 +5,29 @@ var assert = require('chai').assert,
     fs = require('fs'),
     setup = require('./setup');
 
-var testUrl = 'git@github.com:rmccue/test-repository';
+var testUrl = 'git@github.com:tmlbl/sbm-test';
 
 describe('Sync command', function () {
 
   before(function (done) {
-    setup.config({}, done);
+    setup.config({
+      dependencies: [
+        {
+          url: testUrl,
+          path: 'somepath'
+        }
+      ]
+    }, function () {
+      config.load(done);
+    });
   });
 
   it('should pull code when there is none', function (done) {
-    config.add(testUrl, 'somepath', {}, function () {
-      sync_cmd(null, null, function (err) {
-        assert.equal(err, null, 'Err should equal null');
-        return done();
+    sync_cmd(null, null, function (err) {
+      assert.equal(err, null, 'Err should equal null');
+      exec('ls somepath', function (err, stdout, stderr) {
+        assert.isNull(err);
+        done();
       });
     });
   });
