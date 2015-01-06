@@ -5,6 +5,8 @@ var assert = require('chai').assert,
     fs = require('fs'),
     setup = require('./setup');
 
+var testUrl = 'git@github.com:tmlbl/sbm-test';
+
 describe('Add command', function () {
 
   before(function (done) {
@@ -26,7 +28,7 @@ describe('Add command', function () {
 
   it('Should clone a repository', function (next) {
     config.load(function () {
-      add_cmd('git@github.com:rmccue/test-repository', 'somepath', {
+      add_cmd(testUrl, 'somepath', {
         branch: 'master',
         sha: 'f903917612b735ca2baa0d13ba8c071d3b3a8df3'
       }, function (err) {
@@ -49,8 +51,7 @@ describe('Add command', function () {
       var deps = config.config.dependencies;
       assert.lengthOf(deps, 1, 'Deps should have a length of 1');
       assert.equal(deps[0].path, 'somepath', 'Path should be correct');
-      assert.equal(deps[0].url, 'git@github.com:rmccue/test-repository',
-        'Url should be correct');
+      assert.equal(deps[0].url, testUrl, 'Url should be correct');
       next();
     });
   });
