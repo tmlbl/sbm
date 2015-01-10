@@ -4,7 +4,7 @@ var config = require('../lib/config'),
     fs = require('fs'),
     setup = require('./setup');
 
-describe.only('Config module', function () {
+describe('Config module', function () {
 
   beforeEach(function (done) {
     setup.config({}, done);
