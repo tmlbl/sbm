@@ -1,8 +1,9 @@
 var assert = require('chai').assert,
     add_cmd = require('../lib/add'),
     exec = require('child_process').exec,
-    config = require('../lib/config'),
+    config = require('../lib/config.js'),
     fs = require('fs'),
+    gi = require('../lib/config/gitignore'),
     setup = require('./setup');
 
 var testUrl = 'git@github.com:tmlbl/sbm-test';
@@ -39,9 +40,9 @@ describe('Add command', function () {
   });
 
   it('Should add the path to .gitignore', function (next) {
-    fs.readFile('./.gitignore', function (err, content) {
+    gi.load(function (err, gitignore) {
       assert.equal(err, null, 'Err should equal null');
-      assert.equal(content.toString(), 'somepath\n', 'Path should be in .gitignore');
+      assert(gitignore.contains('somepath'), 'Path should be in .gitignore');
       next();
     });
   });
