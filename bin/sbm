@@ -7,8 +7,6 @@ var config = require('../lib/config'),
 config.load(function (err) {
   if (err && process.argv.indexOf('init') == -1) {
     ui.warn(err);
-    program.outputHelp();
-    process.exit();
   }
   program.parse(process.argv);
 });
