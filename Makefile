@@ -5,4 +5,5 @@ test:
 
 .PHONY: install
 install:
+	- sudo npm rm -g sbm;
 	- sudo npm i -g .;
