@@ -23,7 +23,7 @@ describe('Sync command', function () {
   });
 
   afterEach(function (done) {
-    exec('rm -rf somepath/', done);
+    exec('rm -rf somepath/ sbm.json', done);
   });
 
   it('should pull code when there is none', function (done) {

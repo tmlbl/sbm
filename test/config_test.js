@@ -4,7 +4,7 @@ var config = require('../lib/config'),
     fs = require('fs'),
     setup = require('./setup');
 
-describe('Config module', function () {
+describe.only('Config module', function () {
 
   beforeEach(function (done) {
     setup.config({}, done);
@@ -36,21 +36,26 @@ describe('Config module', function () {
       branch: 'branch',
       sha: 'sha'
     }, function (err) {
-      assert.equal(err, null, 'Err should be null');
-      var dep = config.config.dependencies[0];
-      assert.equal(dep.url, 'repo', 'URL should be correct');
-      assert.equal(dep.path, 'path', 'Path should be correct');
-      assert.equal(dep.branch, 'branch', 'Branch should be correct');
-      assert.equal(dep.sha, 'sha', 'SHA should be correct');
-      next();
+      config.load(function () {
+        assert.equal(err, null, 'Err should be null');
+        var dep = config.config.dependencies[0];
+        assert.equal(dep.url, 'repo', 'URL should be correct');
+        assert.equal(dep.path, 'path', 'Path should be correct');
+        assert.equal(dep.branch, 'branch', 'Branch should be correct');
+        assert.equal(dep.sha, 'sha', 'SHA should be correct');
+        next();
+      })
     });
   });
 
   it('Should remove a dependency', function (next) {
-    config.remove('path', function (err) {
+    config.remove('path/', function (err) {
       assert.equal(err, null, 'Err should be null');
-      assert.lengthOf(config.config.dependencies, 0, 'Dep should have been removed');
-      next();
+
+      config.load(function (err) {
+        assert.lengthOf(config.config.dependencies, 0, 'Dep should have been removed');
+        next();
+      })
     });
   });
 
