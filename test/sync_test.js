@@ -7,7 +7,7 @@ var assert = require('chai').assert,
 
 var testUrl = 'git@github.com:tmlbl/sbm-test';
 
-describe('Sync command', function () {
+describe.only('Sync command', function () {
 
   before(function (done) {
     setup.config({
@@ -35,5 +35,38 @@ describe('Sync command', function () {
       });
     });
   });
+
+  describe('When given a branch', function () {
+
+    before(function (done) {
+      setup.config({
+        dependencies: [
+          {
+            url: testUrl,
+            path: 'somepath',
+            branch: 'other'
+          }
+        ]
+      }, function () {
+        config.load(done);
+      })
+    });
+
+    after(function (done) {
+      exec('rm -rf somepath', done);
+    });
+
+    it('Should sync to a branch in config', function (done) {
+      sync_cmd(null, null, function (err) {
+        assert.equal(err, null, 'Err should equal null');
+        exec('cd somepath && git branch', function (err, stdout, stderr) {
+          assert.isNull(err);
+          assert.notEqual(-1, stdout.indexOf('other'));
+          done();
+        });
+      });
+    });
+
+  })
 
 });
