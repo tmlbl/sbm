@@ -29,4 +29,3 @@ sbm sync lib/mylib
 ```
 sbm rm lib/mylib
 ```
-

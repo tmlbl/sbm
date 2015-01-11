@@ -67,6 +67,41 @@ describe('Sync command', function () {
       });
     });
 
-  })
+  });
+
+  describe('When given a SHA', function () {
+
+    var testSha = 'c237e220f4188dd9475e5d8e4f897188f561d558';
+
+    before(function (done) {
+      setup.config({
+        dependencies: [
+          {
+            url: testUrl,
+            path: 'somepath',
+            sha: testSha
+          }
+        ]
+      }, function () {
+        config.load(done);
+      })
+    });
+
+    after(function (done) {
+      exec('rm -rf somepath', done);
+    });
+
+    it('Should sync to a SHA in config', function (done) {
+      sync_cmd(null, null, function (err) {
+        assert.equal(err, null, 'Err should equal null');
+        exec('cd somepath && git rev-parse HEAD', function (err, stdout, stderr) {
+          assert.isNull(err);
+          assert(stdout.indexOf(testSha) != -1);
+          done();
+        });
+      });
+    });
+
+  });
 
 });

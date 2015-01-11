@@ -5,13 +5,18 @@ var exec = require('child_process').exec,
 
 describe('gitignore module', function () {
 
+  function assertEndingNewline (gitignore) {
+    assert(gitignore.string[gitignore.string.length - 1] == '\n');
+  }
+
   it('should load a valid .gitignore', function (done) {
     exec('echo "fugazi" > .gitignore', function () {
       gi.load(function (err, gitignore) {
         assert(err == null);
         assert(!!gitignore);
         assert.equal(typeof gitignore, 'function');
-        assert(gitignore.contains('fugazi'))
+        assert(gitignore.contains('fugazi'));
+        assertEndingNewline(gitignore);
         done();
       });
     });
@@ -22,6 +27,7 @@ describe('gitignore module', function () {
       assert(err == null);
       gi.load(function (err, gitignore) {
         assert(gitignore.contains('nomo'));
+        assertEndingNewline(gitignore);
         done();
       });
     });
@@ -32,6 +38,7 @@ describe('gitignore module', function () {
       assert(err == null);
       gi.load(function (err, gitignore) {
         assert(!gitignore.contains('nomo'));
+        assertEndingNewline(gitignore);
         done();
       });
     });
