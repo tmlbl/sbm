@@ -1,4 +1,4 @@
-sbm
+sbm [![Build Status](https://travis-ci.org/tmlbl/sbm.svg)](https://travis-ci.org/tmlbl/sbm)
 ===
 
 Git submodules, the way I wish they worked.
