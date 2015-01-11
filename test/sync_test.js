@@ -7,7 +7,7 @@ var assert = require('chai').assert,
 
 var testUrl = 'git@github.com:tmlbl/sbm-test';
 
-describe.only('Sync command', function () {
+describe('Sync command', function () {
 
   before(function (done) {
     setup.config({
