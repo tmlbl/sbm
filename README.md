@@ -3,9 +3,30 @@ sbm
 
 Git submodules, the way I wish they worked.
 
-I want to:
-  * Install a git repo as a dependency
-  * Track a certain branch as a dependency
-  * Fetch nested dependencies recursively
-  * Store dependency info in config file
-  * Specify a certain SHA as a dependency
+## Install
+```
+npm i -g sbm
+```
+Or, clone this repository and run `make install`.
+
+## Use
+
+It's easy, and fun.
+
+### Initialize a project
+```
+sbm init
+```
+### Add a dependency
+```
+sbm add -b mybranch git@github.com:me/myrepo lib/mylib
+```
+### Fetch latest code
+```
+sbm sync lib/mylib
+```
+### Remove a dependency
+```
+sbm rm lib/mylib
+```
+
