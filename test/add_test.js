@@ -6,7 +6,7 @@ var assert = require('chai').assert,
     gi = require('../lib/config/gitignore'),
     setup = require('./setup');
 
-var testUrl = 'git@github.com:tmlbl/sbm-test';
+var testUrl = 'https://github.com/tmlbl/sbm-test.git';
 
 describe('Add command', function () {
 

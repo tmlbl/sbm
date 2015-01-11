@@ -5,7 +5,7 @@ var setup = require('./setup').config,
     exec = require('child_process').exec,
     fs = require('fs');
 
-var testUrl = 'git@github.com:tmlbl/sbm-test',
+var testUrl = 'https://github.com/tmlbl/sbm-test.git',
     testPath = 'somepath';
 
 describe('RM command', function () {

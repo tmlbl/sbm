@@ -5,7 +5,7 @@ var assert = require('chai').assert,
     fs = require('fs'),
     setup = require('./setup');
 
-var testUrl = 'git@github.com:tmlbl/sbm-test';
+var testUrl = 'https://github.com/tmlbl/sbm-test.git';
 
 describe('Sync command', function () {
 
