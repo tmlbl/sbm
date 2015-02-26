@@ -26,7 +26,8 @@ describe('gitignore module', function () {
     gi.add('nomo', function (err) {
       assert(err == null);
       gi.load(function (err, gitignore) {
-        assert(gitignore.contains('nomo'));
+        console.log("ignore: " + gitignore.string);
+        assert(gitignore.string.indexOf('\nnomo') !== -1);
         assertEndingNewline(gitignore);
         done();
       });
@@ -37,7 +38,7 @@ describe('gitignore module', function () {
     gi.remove('nomo', function (err) {
       assert(err == null);
       gi.load(function (err, gitignore) {
-        assert(!gitignore.contains('nomo'));
+        assert(!gitignore.contains('\nnomo'));
         assertEndingNewline(gitignore);
         done();
       });
