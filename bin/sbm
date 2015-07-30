@@ -7,6 +7,8 @@ var config = require('../lib/config'),
 config.load(function (err) {
   if (err && process.argv.indexOf('init') == -1) {
     ui.warn(err);
+  } else if (process.argv.length < 3) {
+    ui.info('Run sbm -h to see usage');
   }
   program.parse(process.argv);
 });
